@@ -1,4 +1,6 @@
-*.out
 *.exe
 *.stackdump
 *.in.txt
+*.in
+*.out
+*.out.txt
