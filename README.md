@@ -7,11 +7,11 @@ judges (OJs).
 Contents
 --------
 
- Alias | Profile                                             | Full Name
-:-----:|-----------------------------------------------------|-----------------------------------------
- bnuoj | http://www.bnuoj.com/bnuoj/userinfo.php?name=euyuil | Beijing Normal University Online Judge
-  cf   | http://codeforces.com/profile/euyuil                | Codeforces
-  hdu  |                                                     | Hangzhou Dianzi University Online Judge
-  poj  |                                                     | Peking University Online Judge
-  sgu  |                                                     | Saratov State University Online Judge
-  uva  |                                                     | UVa Online Judge
+ Alias | Profile                                                       | Full Name
+:-----:|---------------------------------------------------------------|-----------------------------------------
+ bnuoj | [euyuil](http://www.bnuoj.com/bnuoj/userinfo.php?name=euyuil) | Beijing Normal University Online Judge
+  cf   | [euyuil](http://codeforces.com/profile/euyuil)                | Codeforces
+  hdu  |                                                               | Hangzhou Dianzi University Online Judge
+  poj  |                                                               | Peking University Online Judge
+  sgu  |                                                               | Saratov State University Online Judge
+  uva  |                                                               | UVa Online Judge
