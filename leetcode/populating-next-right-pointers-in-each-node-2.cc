@@ -27,10 +27,8 @@ public:
             int depth = front.first;
             TreeLinkNode *p = front.second;
 
-            if (p->left && p->right) {
-                q.push(make_pair(depth + 1, p->left));
-                q.push(make_pair(depth + 1, p->right));
-            }
+            if (p->left) q.push(make_pair(depth + 1, p->left));
+            if (p->right) q.push(make_pair(depth + 1, p->right));
 
             if (!q.empty() && q.front().first == depth)
                 p->next = q.front().second;

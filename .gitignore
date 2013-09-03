@@ -4,5 +4,6 @@
 *.in
 *.out
 *.out.txt
+*.swp
 
 /usaco/dict.txt
