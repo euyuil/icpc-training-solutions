@@ -4,6 +4,12 @@
 
 using namespace std;
 
+template <typename T>
+T gcd(T a, T b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
 class Solution {
 public:
     vector<int> getRow(int rowIndex) {
@@ -19,6 +25,8 @@ public:
             for (int i = 1; i <= (rowIndex / 2); ++i) {
                 ni *= (long long)(rowIndex - i + 1);
                 mi *= (long long)(i);
+                long long g = gcd(ni, mi);
+                ni /= g; mi /= g;
                 ret[i] = (int)(ni / mi);
             }
 
