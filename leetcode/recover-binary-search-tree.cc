@@ -25,50 +25,46 @@ struct TreeNode {
 
 class Solution {
 
-    TreeNode **ptrprev;
-    vector<pair<TreeNode **, TreeNode **> > reverses;
+    TreeNode *prev;
+    vector<pair<TreeNode *, TreeNode *> > reverses;
 
-    void recursive(TreeNode **ptrroot) {
+    void recursive(TreeNode *root) {
 
-        TreeNode *root = *ptrroot;
         if (!root) return;
 
-        cout << ptrroot << ' ' << *ptrroot << endl;
+        recursive(root->left);
 
-        recursive(&root->left);
-
-        if (ptrprev && *ptrprev) {
-            TreeNode *prev = *ptrprev;
+        if (prev) {
             if (prev->val > root->val) {
-                reverses.push_back(make_pair(ptrprev, ptrroot));
+                reverses.push_back(make_pair(prev, root));
             }
         }
-        ptrprev = ptrroot;
+        prev = root;
 
-        recursive(&root->right);
+        recursive(root->right);
     }
 
 public:
 
     void recoverTree(TreeNode *root) {
-        ptrprev = NULL;
+
+        prev = NULL;
         reverses.clear();
-        recursive(&root);
-        // assume reverses == 1 or == 2
+        recursive(root);
+
         if (reverses.size() == 1) {
-            swap((*reverses[0].first)->val, (*reverses[0].second)->val);
+            swap(reverses[0].first->val, reverses[0].second->val);
         } else {
-            TreeNode **smallest = reverses[0].second;
-            TreeNode **largest = reverses[1].first;
-            swap((*smallest)->val, (*largest)->val);
+            swap(reverses[0].first->val, reverses[1].second->val);
         }
         cout << reverses.size() << endl;
     }
 };
 
 int main() {
-    TreeNode *root = new TreeNode(0);
-    root->left = new TreeNode(1);
+    TreeNode *root = new TreeNode(2);
+    root->left = new TreeNode(3);
+    root->right = new TreeNode(1);
     Solution().recoverTree(root);
     return 0;
 }
