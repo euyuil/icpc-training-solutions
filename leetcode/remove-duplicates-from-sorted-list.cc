@@ -11,17 +11,18 @@ class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
 
-        ListNode *ret = NULL, **ptail = &ret, *next;
+        ListNode *ret = NULL, **ptail = &ret, *next, *prev = NULL;
 
         for (ListNode *p = head; p; p = next) {
 
             next = p->next;
 
-            if (!*ptail || ptail->val != p->val) {
+            if (prev && prev->val == p->val) {
+                delete p;
+            } else {
                 *ptail = p;
                 ptail = &p->next;
-            } else {
-                delete p;
+                prev = p;
             }
         }
 

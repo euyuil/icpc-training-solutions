@@ -10,14 +10,14 @@ class Solution {
 
         int ret = 0;
 
-        while (st.size() && arr[i] <= st.back().second) {
+        while (st.size() && value <= st.back().second) {
             int height = st.back().second;
             st.pop_back();
-            int width = i - st.back().first - 1;
+            int width = index - st.back().first - 1;
             int area = width * height;
             ret = max(ret, area);
         }
-        st.push_back(make_pair(i, arr[i]));
+        st.push_back(make_pair(index, value));
 
         return ret;
     }
