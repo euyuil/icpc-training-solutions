@@ -13,8 +13,8 @@ class Solution {
     inline static void pushInterval(
         vector<Interval> &ret, Interval &interval) {
 
-        if (ret.size() && ret.back().end <= interval.start) {
-            ret.back().end = interval.end;
+        if (ret.size() && ret.back().end >= interval.start) {
+            ret.back().end = max(ret.back().end, interval.end);
         } else {
             ret.push_back(interval);
         }
@@ -31,10 +31,12 @@ public:
         for (int i = 0; i < intervals.size(); ++i) {
             if (!inserted && intervals[i].start >= newInterval.start) {
                 inserted = true;
-                push_interval(ret, newInterval);
+                pushInterval(ret, newInterval);
             }
-            push_interval(ret, intervals[i]);
+            pushInterval(ret, intervals[i]);
         }
+
+        if (!inserted) pushInterval(ret, newInterval);
 
         return ret;
     }

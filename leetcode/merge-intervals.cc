@@ -24,7 +24,7 @@ public:
             int curr = i - delta, prev = curr - 1;
             if (prev >= 0) {
                 if (intervals[prev].end >= intervals[i].start) {
-                    intervals[prev].end = intervals[i].end;
+                    intervals[prev].end = max(intervals[prev].end, intervals[i].end);
                     ++delta;
                 } else {
                     intervals[curr].start = intervals[i].start;

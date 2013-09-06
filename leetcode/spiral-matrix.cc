@@ -5,9 +5,24 @@ class Solution {
 
     int m, n, mn;
 
-    inline int line_length(int dir) {
+    inline int lineLength(int dir) {
         int ret = (dir & 1) ? m : n;
         return ret - dir / 2;
+    }
+
+    inline void firstStep(int &x, int &y, int &dir, int &len) {
+        x = 0; y = 0; dir = 1; len = lineLength(dir) - 1;
+    }
+
+    inline bool nextStep(int &x, int &y, int &dir, int &len) {
+        if (len--) {
+            x += dx[dir % 4]; y += dy[dir % 4];
+            return true;
+        } else {
+            len = lineLength(++dir);
+            if (len > 0) return nextStep(x, y, dir, len);
+        }
+        return false;
     }
 
 public:
@@ -21,17 +36,12 @@ public:
         m = matrix[0].size();
         mn = m * n;
 
-        int dir = 1, x = 0, y = 0;
-        for (int i = 1; i < mn; ++i) {
-            int nx = x + dx[dir % 4], ny = y + dy[dir % 4];
-            if (nx < 0 || ny < 0 || nx >= m || ny >= n) {
-                ++dir; --i;
-                continue;
-            }
-            ret.push_back(matrix[y][x]);
-            x = nx; y = ny;
-        }
+        int x, y, dir, len;
+        firstStep(x, y, dir, len);
         ret.push_back(matrix[y][x]);
+
+        while (nextStep(x, y, dir, len))
+            ret.push_back(matrix[y][x]);
 
         return ret;
     }
