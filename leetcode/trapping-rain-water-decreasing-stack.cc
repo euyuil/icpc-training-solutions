@@ -8,31 +8,39 @@ using namespace std;
 class Solution {
 
     struct elem {
-        int index, value, minus;
-        elem(int i, int v, int m) : index(i), value(v), minus(m) { }
+        int index, value;
+        elem(int i, int v) : index(i), value(v) { }
     };
 
-    int *A, n, ret, minus;
+    int *A, n, ret;
     vector<elem> st;
 
     void push_stack(int index, int value) {
 
-        if (st.back().value > value) {
+        int last_height = 0;
 
-            st.back().minus += value;
-
-        } else if (st.back().value <= value) {
+        while (st.size() && st.back().value <= value) {
 
             int width = index - st.back().index - 1;
-            int height = st.back().value;
-            int minus = st.back().minus;
+            int this_height = st.back().value;
+            int height = this_height - last_height;
+
+            ret += width * height;
 
             st.pop_back();
 
-            ret += width * height - minus;
-
-            st.push_back(elem(index, value, 0));
+            last_height = this_height;
         }
+
+        if (st.size()) {
+
+            int width = index - st.back().index - 1;
+            int height = value - last_height;
+
+            ret += width * height;
+        }
+
+        st.push_back(elem(index, value));
     }
 
 public:
@@ -43,14 +51,10 @@ public:
         this->n = n;
 
         ret = 0;
-        minus = 0;
         st.clear();
-        st.push_back(elem(-1, 0, 0));
 
         for (int i = 0; i < n; ++i)
             push_stack(i, A[i]);
-
-        push_stack(n, 0);
 
         return ret;
     }

@@ -7,12 +7,11 @@ using namespace std;
 class Solution {
 
     string normalize(string num) {
-        for (int i = num.size() - 1; i >= 0; --i) {
-            if (num[i] != '0') {
-                num.resize(i + 1);
+        int i;
+        for (i = num.size() - 1; i >= 0; --i)
+            if (num[i] != '0')
                 break;
-            }
-        }
+        num.resize(i + 1, '0');
         if (num.size() == 0)
             return string("0");
         return num;
@@ -32,7 +31,7 @@ class Solution {
             ret += (digit % 10 + '0');
         }
 
-        if (carrier) num += (carrier + '0');
+        if (carrier) ret += (carrier + '0');
 
         return ret;
     }
@@ -64,10 +63,11 @@ public:
 
     string multiply(string num1, string num2) {
 
-        num1 = normalize(num1);
-        num2 = normalize(num2);
         reverse(num1.begin(), num1.end());
         reverse(num2.begin(), num2.end());
+
+        num1 = normalize(num1);
+        num2 = normalize(num2);
 
         string sum;
         for (int i = 0; i < num2.size(); ++i) {
@@ -85,6 +85,8 @@ public:
 };
 
 int main() {
-    cout << Solution().multiply("1", "1") << endl;
+    string a, b;
+    while (cin >> a >> b)
+        cout << Solution().multiply(a, b) << endl;
     return 0;
 }
